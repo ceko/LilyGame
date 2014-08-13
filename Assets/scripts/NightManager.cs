@@ -5,6 +5,8 @@ public class NightManager : MonoBehaviour {
 
 	public GameObject Song;
 	public GameObject Stars;
+	public GameObject Moon;
+	public GameObject Singalong;
 
 	// Use this for initialization
 	void Start () {
@@ -14,6 +16,7 @@ public class NightManager : MonoBehaviour {
 	void OnAudioFinished (AudioEventHelper sender) {
 		Stars.GetComponent<Stars>().StopAnimations();
 		handlingMoonClick = false;
+		Moon.GetComponent<Moon>().SongFinished();
 	}
 	
 	// Update is called once per frame
@@ -27,6 +30,8 @@ public class NightManager : MonoBehaviour {
 			handlingMoonClick = true;
 			Song.GetComponent<AudioEventHelper>().PlayMusic();
 			Stars.GetComponent<Stars>().AnimateChildren();
+			StartCoroutine (Singalong.GetComponent<SongText>().StartSingalong());
+
 		}
 	}
 
